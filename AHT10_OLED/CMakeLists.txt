@@ -33,9 +33,16 @@ project(AHT10_OLED C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-# Add executable. Default name is the project name, version 0.1
+set(MODULES_BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/modules)
+set(DISPLAY_MODULE_DIR ${MODULES_BASE_DIR}/display)
+set(AHT10_MODULE_DIR ${MODULES_BASE_DIR}/aht10)
 
-add_executable(AHT10_OLED AHT10_OLED.c inc/ssd1306_i2c.c)
+# Add executable. Default name is the project name, version 0.1
+add_executable(AHT10_OLED 
+    AHT10_OLED.c
+    ${DISPLAY_MODULE_DIR}/display.c
+    ${DISPLAY_MODULE_DIR}/inc/ssd1306_i2c.c
+    ${AHT10_MODULE_DIR}/aht10.c)
 
 pico_set_program_name(AHT10_OLED "AHT10_OLED")
 pico_set_program_version(AHT10_OLED "0.1")
@@ -50,13 +57,15 @@ target_link_libraries(AHT10_OLED
 
 # Add the standard include files to the build
 target_include_directories(AHT10_OLED PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}
+    ${CMAKE_CURRENT_LIST_DIR}
+    ${DISPLAY_MODULE_DIR}               
+    ${DISPLAY_MODULE_DIR}/inc
+    ${AHT10_MODULE_DIR}    
 )
 
 # Add any user requested libraries
 target_link_libraries(AHT10_OLED 
         hardware_i2c
-        
         )
 
 pico_add_extra_outputs(AHT10_OLED)
