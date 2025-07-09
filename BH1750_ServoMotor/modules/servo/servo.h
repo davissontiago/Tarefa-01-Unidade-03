@@ -3,8 +3,8 @@
 
 #include <stdint.h> 
 
-void configurar_servo();
-void enviar_pulso_servo(uint duty_us);
+void servo_setup();
+void servo_send_pulso(uint duty_us);
 
 #endif
 

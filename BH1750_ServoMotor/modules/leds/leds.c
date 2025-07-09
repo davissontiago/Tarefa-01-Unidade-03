@@ -7,7 +7,7 @@
 #define LED_BLUE 12
 #define LED_RED 13
 
-void configurar_leds() {
+void leds_setup() {
     gpio_init(LED_RED);
     gpio_set_dir(LED_RED, GPIO_OUT);
     gpio_init(LED_BLUE);
@@ -16,25 +16,25 @@ void configurar_leds() {
     gpio_set_dir(LED_GREEN, GPIO_OUT);
 }
 
-void acender_led_baixo() {
+void led_low() {
     gpio_put(LED_RED, 1);
     gpio_put(LED_BLUE, 0);
     gpio_put(LED_GREEN, 0);
 }
 
-void acender_led_medio() {
+void led_mid() {
     gpio_put(LED_RED, 1);
     gpio_put(LED_BLUE, 0);
     gpio_put(LED_GREEN, 1);
 }
 
-void acender_led_alto() {
+void led_high() {
     gpio_put(LED_RED, 0);
     gpio_put(LED_BLUE, 0);
     gpio_put(LED_GREEN, 1);
 }
 
-void acender_led_muito_alto() {
+void led_very_high() {
     gpio_put(LED_RED, 1);
     gpio_put(LED_BLUE, 1);
     gpio_put(LED_GREEN, 1);

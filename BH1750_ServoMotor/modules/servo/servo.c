@@ -9,12 +9,12 @@
 #define PINO_SERVO 8
 #define PERIODO_SERVO 20
 
-void configurar_servo() {
+void servo_setup() {
     gpio_init(PINO_SERVO);
     gpio_set_dir(PINO_SERVO, GPIO_OUT);
 }
 
-void enviar_pulso_servo(uint duty_us) {
+void servo_send_pulso(uint duty_us) {
     gpio_put(PINO_SERVO, 1);
     sleep_us(duty_us);
     gpio_put(PINO_SERVO, 0);

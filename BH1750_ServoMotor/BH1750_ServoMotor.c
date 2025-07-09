@@ -12,24 +12,25 @@ void acender_led_por_lux(float lux) {
     char message[50]; 
 
     if (lux <= 100) {
-        acender_led_baixo();
+        led_low();
         snprintf(message, sizeof(message), "Baixo: %.1f lx", lux);
-        enviar_pulso_servo(1000);
+        servo_send_pulso(1000);
     } else if (lux <= 300) {
-        acender_led_medio();
+        led_mid();
         snprintf(message, sizeof(message), "Medio: %.1f lx", lux);
-        enviar_pulso_servo(1500); 
+        servo_send_pulso(1500); 
     } else if (lux <= 700) {
-        acender_led_alto();
+        led_high();
         snprintf(message, sizeof(message), "Alto: %.1f lx", lux);
-        enviar_pulso_servo(2000);
+        servo_send_pulso(2000);
     } else {
-        acender_led_muito_alto();
-        snprintf(message, sizeof(message), "Altissimo: %.1f lx", lux);
-        enviar_pulso_servo(4000); 
+        led_very_high();
+        snprintf(message, sizeof(message), "High: %.1f lx", lux);
+        servo_send_pulso(4000); 
     }
-    message_display(message, 1);
-    update_display();
+    display_clear();
+    display_message(message, 3);
+    display_update();
 }
 
 // --- Função Principal ---
@@ -37,18 +38,19 @@ int main() {
     stdio_init_all(); 
 
     // Configuração de Periféricos
-    configurar_leds();
-    configurar_servo();
-    init_bh1750(); 
-    init_display(); 
+    leds_setup();
+    servo_setup();
+
+    bh1750_init(); 
+    display_init(); 
 
     // Loop Principal
     while (true) {
-        float lux = read_bh1750_lux(); 
+        float lux = bh1750_read_lux(); 
         if (lux >= 0) { 
             acender_led_por_lux(lux); 
         } else {
-            message_display("Erro BH1750", 1);
+            display_message("Erro BH1750", 3);
         }
         sleep_ms(100);
     }

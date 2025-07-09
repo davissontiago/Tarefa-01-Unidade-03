@@ -10,7 +10,7 @@
 #define BH1750_ADDR 0x23
 #define BH1750_CONTINUOUS_HIGH_RES_MODE 0x10
 
-void init_bh1750() {
+void bh1750_init() {
     i2c_init(BH1750_I2C_PORT, 100 * 1000);
     gpio_set_function(BH1750_SDA_PIN, GPIO_FUNC_I2C);
     gpio_set_function(BH1750_SCL_PIN, GPIO_FUNC_I2C);
@@ -21,7 +21,7 @@ void init_bh1750() {
     i2c_write_blocking(BH1750_I2C_PORT, BH1750_ADDR, buf, 1, false);
 }
 
-float read_bh1750_lux() {
+float bh1750_read_lux() {
     uint8_t data[2];
     int bytes_read = i2c_read_blocking(BH1750_I2C_PORT, BH1750_ADDR, data, 2, false);
     if (bytes_read != 2) {

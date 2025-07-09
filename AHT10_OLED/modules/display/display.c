@@ -12,7 +12,7 @@
 struct render_area frame_area;
 uint8_t ssd_buffer[ssd1306_buffer_length];
 
-void init_display()
+void display_init()
 {
     i2c_init(OLED_I2C_PORT, OLED_I2C_BAUDRATE);
     gpio_set_function(OLED_SDA_PIN, GPIO_FUNC_I2C);
@@ -32,17 +32,17 @@ void init_display()
     printf("Display OLED inicializado no I2C1.\n");
 }
 
-void clear_display()
+void display_clear()
 {
     memset(ssd_buffer, 0, ssd1306_buffer_length);
     render_on_display(ssd_buffer, &frame_area);
 }
 
-void message_display(const char *message, int line)
+void display_message(const char *message, int line)
 {
     ssd1306_draw_string(ssd_buffer, 5, line * 8, message);
 }
 
-void update_display(void) {
+void display_update(void) {
     render_on_display(ssd_buffer, &frame_area);
 }

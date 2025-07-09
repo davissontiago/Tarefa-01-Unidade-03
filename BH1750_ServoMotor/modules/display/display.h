@@ -3,9 +3,9 @@
 
 #include <stdint.h> 
 
-void init_display(void);
-void clear_display(void);
-void message_display(const char *message, int line);
-void update_display(void);
+void display_init(void);
+void display_clear(void);
+void display_message(const char *message, int line);
+void display_update(void);
 
 #endif

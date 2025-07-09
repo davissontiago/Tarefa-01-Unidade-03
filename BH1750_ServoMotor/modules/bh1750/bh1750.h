@@ -3,7 +3,7 @@
 
 #include <stdint.h> 
 
-void init_bh1750();
-float read_bh1750_lux();
+void bh1750_init();
+float bh1750_read_lux();
 
 #endif

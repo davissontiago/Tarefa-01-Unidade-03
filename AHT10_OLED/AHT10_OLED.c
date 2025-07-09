@@ -10,15 +10,8 @@ int main()
 {
     stdio_init_all();
 
-    printf("Iniciando sistema com AHT10 e OLED...\n");
-
-    init_display();
-    clear_display();
-    message_display("Iniciando...", 0);
-    message_display("AHT10 & OLED", 1);
-    
-    sleep_ms(2000);
-    clear_display();
+    display_init();
+    display_clear();
 
     aht10_init();
 
@@ -53,24 +46,24 @@ int main()
             snprintf(temp_str, sizeof(temp_str), "Temp: %.1f C", temperature);
             snprintf(hum_str, sizeof(hum_str), "Umid: %.1f %%RH", humidity);
 
-            clear_display();
+            display_clear();
 
-            message_display(temp_str, 0); 
-            message_display(hum_str, 2);  
+            display_message(temp_str, 0); 
+            display_message(hum_str, 2);  
 
             if (alerta_str[0] != '\0')
             {                                        
-                message_display(alerta_str, 4); 
+                display_message(alerta_str, 4); 
             }
 
-            update_display(); 
+            display_update(); 
         }
         else
         {
             printf("Falha na leitura do AHT10. Tentando resetar...\n");
-            clear_display();
-            message_display("Erro AHT10!", 0);
-            update_display();
+            display_clear();
+            display_message("Erro AHT10!", 0);
+            display_update();
             aht10_reset();
             sleep_ms(500);
         }
