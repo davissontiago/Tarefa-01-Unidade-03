@@ -33,9 +33,20 @@ project(BH1750_ServoMotor C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-# Add executable. Default name is the project name, version 0.1
+set(MODULES_BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/modules)
+set(DISPLAY_MODULE_DIR ${MODULES_BASE_DIR}/display)
+set(SERVO_MODULE_DIR ${MODULES_BASE_DIR}/servo)
+set(BH1750_MODULE_DIR ${MODULES_BASE_DIR}/bh1750)
+set(LEDS_MODULE_DIR ${MODULES_BASE_DIR}/leds)
 
-add_executable(BH1750_ServoMotor BH1750_ServoMotor.c inc/ssd1306_i2c.c)
+# Add executable. Default name is the project name, version 0.1
+add_executable(BH1750_ServoMotor 
+            BH1750_ServoMotor.c
+            ${DISPLAY_MODULE_DIR}/display.c
+            ${DISPLAY_MODULE_DIR}/inc/ssd1306_i2c.c
+            ${SERVO_MODULE_DIR}/servo.c
+            ${BH1750_MODULE_DIR}/bh1750.c
+            ${LEDS_MODULE_DIR}/leds.c)
 
 pico_set_program_name(BH1750_ServoMotor "BH1750_ServoMotor")
 pico_set_program_version(BH1750_ServoMotor "0.1")
@@ -54,6 +65,11 @@ target_link_libraries(BH1750_ServoMotor
 # Add the standard include files to the build
 target_include_directories(BH1750_ServoMotor PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
+        ${DISPLAY_MODULE_DIR}               
+        ${DISPLAY_MODULE_DIR}/inc   
+        ${SERVO_MODULE_DIR} 
+        ${BH1750_MODULE_DIR}
+        ${LEDS_MODULE_DIR}
 )
 
 # Add any user requested libraries
