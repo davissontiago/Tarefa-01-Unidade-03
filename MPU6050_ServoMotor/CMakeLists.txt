@@ -33,9 +33,19 @@ project(MPU6050_ServoMotor C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-# Add executable. Default name is the project name, version 0.1
+set(MODULES_BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/modules)
+set(SERVO_PWM_MODULE_DIR ${MODULES_BASE_DIR}/servo_pwm)
+set(DISPLAY_MODULE_DIR ${MODULES_BASE_DIR}/display)
+set(MPU6050_MODULE_DIR ${MODULES_BASE_DIR}/mpu6050)
 
-add_executable(MPU6050_ServoMotor MPU6050_ServoMotor.c inc/ssd1306_i2c.c)
+# Add executable. Default name is the project name, version 0.1
+add_executable(MPU6050_ServoMotor 
+            MPU6050_ServoMotor.c 
+            ${DISPLAY_MODULE_DIR}/inc/ssd1306_i2c.c
+            ${DISPLAY_MODULE_DIR}/display.c
+            ${SERVO_PWM_MODULE_DIR}/servo_pwm.c
+            ${MPU6050_MODULE_DIR}/mpu6050.c
+            )
 
 pico_set_program_name(MPU6050_ServoMotor "MPU6050_ServoMotor")
 pico_set_program_version(MPU6050_ServoMotor "0.1")
@@ -51,6 +61,10 @@ target_link_libraries(MPU6050_ServoMotor
 # Add the standard include files to the build
 target_include_directories(MPU6050_ServoMotor PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
+        ${SERVO_PWM_MODULE_DIR}
+        ${DISPLAY_MODULE_DIR}
+        ${DISPLAY_MODULE_DIR}/inc
+        ${MPU6050_MODULE_DIR}
 )
 
 # Add any user requested libraries
