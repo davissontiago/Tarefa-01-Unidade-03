@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "pico/stdlib.h"
+
 #include "display.h"
 #include "aht10.h"
 
