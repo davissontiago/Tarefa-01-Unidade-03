@@ -4,11 +4,6 @@
 #include "inc/ssd1306.h"
 #include "display.h"
 
-#define OLED_I2C_PORT i2c1
-#define OLED_SDA_PIN 14
-#define OLED_SCL_PIN 15
-#define OLED_I2C_BAUDRATE 400000
-
 struct render_area frame_area;
 uint8_t ssd_buffer[ssd1306_buffer_length];
 

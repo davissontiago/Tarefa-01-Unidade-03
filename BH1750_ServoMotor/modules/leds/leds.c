@@ -3,10 +3,6 @@
 #include "hardware/gpio.h"
 #include "leds.h"
 
-#define LED_GREEN 11
-#define LED_BLUE 12
-#define LED_RED 13
-
 void leds_setup() {
     gpio_init(LED_RED);
     gpio_set_dir(LED_RED, GPIO_OUT);

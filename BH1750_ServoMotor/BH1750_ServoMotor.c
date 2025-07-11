@@ -11,23 +11,22 @@
 // Funções de Lógica Principal
 void acender_led_por_lux(float lux) {
     char message[50]; 
-
     if (lux <= 100) {
         led_low();
         snprintf(message, sizeof(message), "Baixo: %.1f lx", lux);
-        servo_send_pulso(1000);
+        servo_send_pulso(500);
     } else if (lux <= 300) {
         led_mid();
         snprintf(message, sizeof(message), "Medio: %.1f lx", lux);
-        servo_send_pulso(1500); 
+        servo_send_pulso(1000); 
     } else if (lux <= 700) {
         led_high();
         snprintf(message, sizeof(message), "Alto: %.1f lx", lux);
-        servo_send_pulso(2000);
+        servo_send_pulso(1500);
     } else {
         led_very_high();
         snprintf(message, sizeof(message), "High: %.1f lx", lux);
-        servo_send_pulso(4000); 
+        servo_send_pulso(2500); 
     }
     display_clear();
     display_message(message, 3);

@@ -6,9 +6,6 @@
 #include "hardware/pwm.h"
 #include "servo.h"
 
-#define PINO_SERVO 8
-#define PERIODO_SERVO 20
-
 void servo_setup() {
     gpio_init(PINO_SERVO);
     gpio_set_dir(PINO_SERVO, GPIO_OUT);
@@ -20,5 +17,3 @@ void servo_send_pulso(uint duty_us) {
     gpio_put(PINO_SERVO, 0);
     sleep_ms(PERIODO_SERVO - (duty_us / 1000));
 }
-
-
